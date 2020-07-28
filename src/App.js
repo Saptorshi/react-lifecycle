@@ -1,25 +1,60 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import Child from './child.js'
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state ={
+      name : "John"
+    }
+
+    console.log('inside constructor')
+  }
+
+  componentWillMount() {
+    this.setState({
+      name : "Jill"
+    })
+    console.log('inside componentWillMount')
+  }
+
+  componentDidMount() {
+    console.log('inside componentDidMount')
+  }
+
+  componentWillReceiveProps() {
+    console.log('inside componentWillReceiveProps')
+  }
+
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log('inside shouldComponentUpdate')
+    return true;
+  }
+
+  componentWillUpdate() {
+    console.log('inside componentWillUpdate')
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log('inside componentDidUpdate')
+  }
+
+
+
+  changeState() {
+    this.setState({
+      name : "Dana"
+    });
+    console.log('inside changeState')
+  }
+
   render() {
+    console.log('inside render')
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
+        <Child name={this.state.name} />
+        <button onClick={this.changeState.bind(this)}>Change State</button>
       </div>
     );
   }
